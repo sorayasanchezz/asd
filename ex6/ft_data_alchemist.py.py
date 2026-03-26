@@ -5,7 +5,8 @@ if __name__ == "__main__":
     print("=== Game Data Alchemist ===\n")
 
     # initial list
-    players = ['Alice', 'bob', 'Charlie', 'dylan', 'Emma', 'Gregory', 'john', 'kevin', 'Liam']
+    players = ['Alice', 'bob', 'Charlie', 'dylan', 'Emma',
+               'Gregory', 'john', 'kevin', 'Liam']
     print(f"Initial list of players: {players}")
 
     # all capitalized
@@ -25,5 +26,6 @@ if __name__ == "__main__":
     print(f"Score average is {avg}")
 
     # high scores
-    high_scores = {name: value for name, value in scores.items() if value > avg}
+    high_scores = {name: value for name, value in scores.items()
+                   if value > avg}
     print(f"High scores: {high_scores}")

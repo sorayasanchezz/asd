@@ -50,7 +50,8 @@ def calculate_center(input_coord: str) -> tuple[float, float, float]:
 
 
 def two_coords(input_coord: str,
-               origin: tuple[float, float, float]) -> tuple[float, float, float]:
+               origin: tuple[float, float, float]
+               ) -> tuple[float, float, float]:
 
     try:
         parsed_coord = parse_coordinates(input_coord)
