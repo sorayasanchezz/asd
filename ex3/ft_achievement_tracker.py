@@ -1,15 +1,30 @@
-def gen_player_achievements(alice: set, bob: set,
-                            charlie: set, dylan: set) -> None:
+import random
 
-    # find the coommon achievements of players
-    common = alice.union(bob).union(charlie).union(dylan)
-    print("\nAll distinct achievements:", common)
+
+def gen_player_achievements() -> set:
+    achievements = ['Crafting Genius', 'World Savior', 'Master Explorer',
+                    'Collector Supreme', 'Untouchable', 'Boss Slayer',
+                    'Strategist', 'Unstoppable', 'Speed Runner',
+                    'Survivor', 'Treasure Hunter', 'First Steps',
+                    'Sharp Mind', 'Hidden Path Finder']
+
+    nb = random.randint(5, len(achievements))
+    return set(random.sample(achievements, nb))
+
+
+def track_achievements(alice: set, bob: set,
+                       charlie: set, dylan: set,
+                       achievements: set) -> None:
+
+    # find all distinct achievements of players
+    all_ach = alice.union(bob).union(charlie).union(dylan)
+    print("\nAll distinct achievements:", all_ach)
 
     # common achievements
     inter = alice.intersection(bob).intersection(charlie).intersection(dylan)
     print("\nCommon achievements:", inter)
 
-    # all distinct achievements
+    # achievements only one player has
     dif_alice = alice.difference(bob).difference(charlie).difference(dylan)
     dif_bob = bob.difference(alice).difference(charlie).difference(dylan)
     dif_charlie = charlie.difference(alice).difference(bob).difference(dylan)
@@ -19,30 +34,31 @@ def gen_player_achievements(alice: set, bob: set,
     print("Only Charlie has:", dif_charlie)
     print("Only Dylan has:", dif_dylan)
 
-    # find the unique achievements
-    print("\nAlice is missing:", common.difference(alice))
-    print("Bob is missing:", common.difference(bob))
-    print("Charlie is missing:", common.difference(charlie))
-    print("Dylan is missing:", common.difference(dylan))
+    # find the missing achievements
+    print("\nAlice is missing:", achievements.difference(alice))
+    print("Bob is missing:", achievements.difference(bob))
+    print("Charlie is missing:", achievements.difference(charlie))
+    print("Dylan is missing:", achievements.difference(dylan))
 
 
 if __name__ == "__main__":
     print("=== Achievement Tracker System ===\n")
 
-    # handle sets used to store achevements (without duplicates)
-    alice = {'Crafting Genius', 'World Savior', 'Master Explorer',
-             'Collector Supreme', 'Untouchable', 'Boss Slayer'}
-    bob = {'Crafting Genius', 'Strategist', 'World Savior', 'Master Explorer',
-           'Unstoppable', 'Collector Supreme', 'Untouchable'}
-    charlie = {'Strategist', 'Speed Runner', 'Survivor', 'Master Explorer',
-               'Treasure Hunter', 'First Steps', 'Collector Supreme',
-               'Untouchable', 'Sharp Mind'}
-    dylan = {'Strategist', 'Speed Runner', 'Unstoppable', 'Untouchable',
-             'Boss Slayer'}
+    # handle sets used to store achievements (without duplicates)
+    achievements = {'Crafting Genius', 'World Savior', 'Master Explorer',
+                    'Collector Supreme', 'Untouchable', 'Boss Slayer',
+                    'Strategist', 'Unstoppable', 'Speed Runner',
+                    'Survivor', 'Treasure Hunter', 'First Steps',
+                    'Sharp Mind', 'Hidden Path Finder'}
+
+    alice = gen_player_achievements()
+    bob = gen_player_achievements()
+    charlie = gen_player_achievements()
+    dylan = gen_player_achievements()
 
     print("Player Alice:", alice)
-    print("Player Bob", bob)
-    print("Player Charlie", charlie)
-    print("Player Dylan", dylan)
+    print("Player Bob:", bob)
+    print("Player Charlie:", charlie)
+    print("Player Dylan:", dylan)
 
-    gen_player_achievements(alice, bob, charlie, dylan)
+    track_achievements(alice, bob, charlie, dylan, achievements)

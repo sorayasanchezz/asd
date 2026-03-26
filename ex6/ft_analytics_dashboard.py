@@ -1,63 +1,29 @@
+import random
+
+
 if __name__ == "__main__":
-    print("=== Game Analytics Dashboard ===")
+    print("=== Game Data Alchemist ===\n")
 
-    players = ["alice", "bob", "charlie", "diana"]
-    scores = [2300, 1800, 2150, 2050]
-    achievements = {
-        "alice": ["first_kill", "level_10", "boss_slayer",
-                  "arena_win", "treasure_hunter"],
-        "bob": ["first_kill", "level_10", "arena_win"],
-        "charlie": ["first_kill", "level_10", "boss_slayer", "arena_win",
-                    "treasure_hunter", "speed_runner", "dungeon_master"],
-        "diana": ["first_kill", "level_10"]
-    }
-    regions = ["north", "east", "north", "central"]
+    # initial list
+    players = ['Alice', 'bob', 'Charlie', 'dylan', 'Emma', 'Gregory', 'john', 'kevin', 'Liam']
+    print(f"Initial list of players: {players}")
 
-    print("\n=== List Comprehension Examples ===")
-    # Filter high scores
-    high_scores = [players[n] for n in range(len(players)) if scores[n] > 2000]
-    print("High scorers (>2000):", high_scores)
-    # Transform data (scores)
-    scores_doubled = [score * 2 for score in scores]
-    print("Scores doubled:", scores_doubled)
-    # Create new lists (active players)
-    active_player = [player for player in players if player != "diana"]
-    print("Active players:", active_player)
+    # all capitalized
+    capitalized = [name.capitalize() for name in players]
+    print(f"New list with all names capitalized: {capitalized}")
 
-    print("\n=== Dict Comprehension Examples ===")
-    # Create score mapping
-    player_scores = {players[n]: scores[n] for n in range(len(players))}
-    print("Player scores:", player_scores)
-    # Group scores by category
-    score_categories = {
-        "high": len([n for n in scores if n > 2000]),
-        "medium": len([n for n in scores if 1500 < n <= 2000]),
-        "low": len([n for n in scores if n <= 1500])
-    }
-    print("Score categories:", score_categories)
-    # Count occurrences (achievement counts)
-    ach_counts = {player: len(achievements[player]) for player in players}
-    print("Achievement counts:", ach_counts)
+    # only already capitalized
+    capitalized_only = [name for name in players if name[0].isupper()]
+    print(f"New list of capitalized names only: {capitalized_only}")
 
-    print("\n=== Set Comprehension Examples ===")
-    # Find unique players
-    unique_players = {player for player in players}
-    print("Unique players:", unique_players)
-    # Unique achievements
-    uniqu_ach = {ach for ach_list in achievements.values() for ach in ach_list}
-    print("Unique achievements:", uniqu_ach)
-    # Deduplicate data
-    active_regions = {region for region in regions}
-    print("Active regions:", active_regions)
+    # dict with random scores
+    scores = {name: random.randint(0, 1000) for name in capitalized}
+    print(f"Score dict: {scores}")
 
-    max_score = max(scores)
-    max_index_score = scores.index(max_score)
-    max_player = players[max_index_score]
-    n_ach = len((achievements[max_player]))
+    # average
+    avg = round(sum(scores.values()) / len(scores), 2)
+    print(f"Score average is {avg}")
 
-    print("\n=== Combined Analysis ===")
-    print("Total players:", len(players))
-    print("Total unique achievements:", len(uniqu_ach))
-    print("Average score:", sum(scores) / len(scores))
-    print(f"Top performer: {max_player} ({max_score} points, "
-          f"{n_ach} achievements)")
+    # high scores
+    high_scores = {name: value for name, value in scores.items() if value > avg}
+    print(f"High scores: {high_scores}")

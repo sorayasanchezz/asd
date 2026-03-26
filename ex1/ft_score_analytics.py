@@ -20,9 +20,9 @@ if __name__ == "__main__":
             try:
                 scores.append(int(score))
             except ValueError:
-                print("Invalid parameter:", score)
+                print(f"Invalid parameter: '{score}'")
 
-        # analythics (calculates), protect in case of non-numeric values
+        # analythics (calculates)
         if len(scores) == 0:
             print("No scores provided. Usage: python3 "
                   "ft_score_analytics.py <score1> <score2> ...")

@@ -10,12 +10,20 @@ def calculate_distance(point1: tuple[float, float, float],
 
 
 def parse_coordinates(coord_str: str) -> tuple[float, float, float]:
-    """Parse a string like '3,4,0' into a tuple of integers."""
     parsed_coord = coord_str.split(",")
-    x = float(parsed_coord[0])
-    y = float(parsed_coord[1])
-    z = float(parsed_coord[2])
-    return (x, y, z)
+
+    if len(parsed_coord) != 3:
+        raise ValueError("Invalid syntax")
+
+    coords = []
+    for p in parsed_coord:
+        p = p.strip()
+        try:
+            coords.append(float(p))
+        except ValueError as e:
+            raise ValueError(f"Error on parameter '{p}': {e}")
+
+    return (coords[0], coords[1], coords[2])
 
 
 def calculate_center(input_coord: str) -> tuple[float, float, float]:
@@ -42,7 +50,7 @@ def calculate_center(input_coord: str) -> tuple[float, float, float]:
 
 
 def two_coords(input_coord: str,
-               origin: tuple[float]) -> tuple[float, float, float]:
+               origin: tuple[float, float, float]) -> tuple[float, float, float]:
 
     try:
         parsed_coord = parse_coordinates(input_coord)
